@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace Kasos_Aparato_Sistema.Modeliai
 {
-    internal class Preke
+    public class Preke
     {
+        public int Id { get; set; }
+        public int KasosId { get; set; }
+        public string Pavadinimas { get; set; }
+        public decimal Kaina { get; set; }
+
+        public Preke(int id, int kasosId, string pavadinimas, decimal kaina)
+        {
+            Id = id;
+            KasosId = kasosId;
+            Pavadinimas = pavadinimas;
+            Kaina = kaina;
+        }
     }
 }

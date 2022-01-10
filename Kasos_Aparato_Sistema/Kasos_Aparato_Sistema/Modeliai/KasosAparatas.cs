@@ -11,5 +11,10 @@ namespace Kasos_Aparato_Sistema.Modeliai
         public int Id { get; set; }
         public string Pavadinimas { get; set; }
 
+        public KasosAparatas(int id, string pavadinimas)
+        {
+            Id = id;
+            Pavadinimas = pavadinimas;
+        }
     }
 }
