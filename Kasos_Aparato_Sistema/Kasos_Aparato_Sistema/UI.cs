@@ -8,6 +8,15 @@ namespace Kasos_Aparatu_Sistema
 {
     public class UI
     {
+        public UI()
+        {
+            MainMenu();
+        }
+        public void MainMenu()
+        {
+            Console.WriteLine("Kasos Aparatu Sistema");
 
+        }
     }
+
 }
