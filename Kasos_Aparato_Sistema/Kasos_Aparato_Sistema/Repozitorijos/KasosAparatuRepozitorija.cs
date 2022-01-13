@@ -1,11 +1,11 @@
-﻿using Kasos_Aparato_Sistema.Modeliai;
+﻿using Kasos_Aparatu_Sistema.Modeliai;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kasos_Aparato_Sistema.Repozitorijos
+namespace Kasos_Aparatu_Sistema.Repozitorijos
 {
     public class KasosAparatuRepozitorija
     {
