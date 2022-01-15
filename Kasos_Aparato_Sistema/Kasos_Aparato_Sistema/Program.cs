@@ -12,9 +12,13 @@ namespace Kasos_Aparatu_Sistema
     {
         static void Main(string[] args)
         {
-            var prekiuRepozitorija = new PrekiuRepozitorija();
             var kasosAparatuRepozitorija = new KasosAparatuRepozitorija();
+            var prekiuRepozitorija = new PrekiuRepozitorija();
             var uzsakymuRepozitorija = new UzsakymuRepozitorija(prekiuRepozitorija, kasosAparatuRepozitorija, 50);
+
+            var UI = new UI(kasosAparatuRepozitorija, prekiuRepozitorija, uzsakymuRepozitorija);
+            
+
             List<Uzsakymas> uzsakymai = uzsakymuRepozitorija.GautiVisusUzsakymus();
             
             foreach(var uzsakymas in uzsakymai)

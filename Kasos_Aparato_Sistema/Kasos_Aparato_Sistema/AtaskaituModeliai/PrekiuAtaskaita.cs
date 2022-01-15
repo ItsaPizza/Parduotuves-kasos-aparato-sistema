@@ -8,5 +8,6 @@ namespace Kasos_Aparatu_Sistema.AtaskaituModeliai
 {
     public class PrekiuAtaskaita
     {
+
     }
 }

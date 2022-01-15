@@ -19,12 +19,12 @@ namespace Kasos_Aparatu_Sistema.Repozitorijos
             _kasosAparatuRepozitorija = kasosAparatuRepozitorija;
             GeneruotiUzsakyma(uzsakymuSkaicius);
         }
-        public Guid GeneruotiUzsakymoId()
+        private Guid GeneruotiUzsakymoId()
         {
             Guid id = Guid.NewGuid();
             return id;
         }
-        public DateTime GeneruotiUzsakymoLaika()
+        private DateTime GeneruotiUzsakymoLaika()
         {
             DateTime previousMonthDate = DateTime.Today.AddMonths(-1);
             int year = previousMonthDate.Year;
@@ -35,7 +35,7 @@ namespace Kasos_Aparatu_Sistema.Repozitorijos
             return orderTime;
         }
 
-        public List<int> GeneruotiPrekiuSarasa(int kasosNumeris)
+        private List<int> GeneruotiPrekiuSarasa(int kasosNumeris)
         {
             int bendrasPrekiuKiekis = _prekiuRepozitorija.GautiPrekiuKieki();
             List<int> prekiuSarasas = new List<int>();
@@ -49,7 +49,7 @@ namespace Kasos_Aparatu_Sistema.Repozitorijos
 
             return prekiuSarasas;
         }
-        public void GeneruotiUzsakyma(int uzsakymuSkaicius)
+        private void GeneruotiUzsakyma(int uzsakymuSkaicius)
         {
             int kasosAparatuKiekis = _kasosAparatuRepozitorija.GautiKasosAparatuKieki();
             
@@ -60,5 +60,14 @@ namespace Kasos_Aparatu_Sistema.Repozitorijos
             }
         }
         public List<Uzsakymas> GautiVisusUzsakymus() => uzsakymai;
+        public List<DateTime> GautiVisuUzsakymuLaikus()
+        {
+            List<DateTime> uzsakymuLaikai = new List<DateTime>();
+            foreach (var uzsakymas in uzsakymai)
+            {
+                uzsakymuLaikai.Add(uzsakymas.Laikas);
+            }
+            return uzsakymuLaikai;
+        }
     }
 }

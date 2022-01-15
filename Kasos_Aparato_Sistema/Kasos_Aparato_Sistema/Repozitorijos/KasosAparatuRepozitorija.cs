@@ -12,9 +12,9 @@ namespace Kasos_Aparatu_Sistema.Repozitorijos
         private List<KasosAparatas> kasosAparatai = new List<KasosAparatas>();
         public KasosAparatuRepozitorija()
         {
-            kasosAparatai.Add(new KasosAparatas(1, "Maisto prekiu kasa"));
-            kasosAparatai.Add(new KasosAparatas(2, "Dviracio prekiu kasa"));
-            kasosAparatai.Add(new KasosAparatas(3, "Muzikos instrumentu prekiu kasa"));
+            kasosAparatai.Add(new KasosAparatas(1, "Maisto prekių kasa"));
+            kasosAparatai.Add(new KasosAparatas(2, "Dviracio prekių kasa"));
+            kasosAparatai.Add(new KasosAparatas(3, "Muzikos instrumentų prekių kasa"));
 
         }
         public List<KasosAparatas> GautiKasosAparatus() => kasosAparatai;
