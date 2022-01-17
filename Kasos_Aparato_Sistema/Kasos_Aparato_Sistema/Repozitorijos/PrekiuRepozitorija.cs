@@ -17,16 +17,25 @@ namespace Kasos_Aparatu_Sistema.Repozitorijos
             prekes.Add(new Preke(2, 1, "Kiausiniai", 2.39m));
             prekes.Add(new Preke(3, 1, "Pienas", 1.19m));
             prekes.Add(new Preke(4, 1, "Miltai", 1.99m));
+            prekes.Add(new Preke(5, 1, "Sviestas", 2.19m));
+            prekes.Add(new Preke(6, 1, "Cukrus", 3.59m));
+            prekes.Add(new Preke(7, 1, "Druska", 0.99m));
 
-            prekes.Add(new Preke(5, 2, "Dviracio atsvaitas", 3.69m));
-            prekes.Add(new Preke(6, 2, "Dviracio grandine", 33.49m));
-            prekes.Add(new Preke(7, 2, "Dviracio ratas", 154.99m));
-            prekes.Add(new Preke(8, 2, "Dviracio pompa", 20.99m));
+            prekes.Add(new Preke(8, 2, "Dviracio atsvaitas", 3.69m));
+            prekes.Add(new Preke(9, 2, "Dviracio grandine", 33.49m));
+            prekes.Add(new Preke(10, 2, "Dviracio ratas", 154.99m));
+            prekes.Add(new Preke(11, 2, "Dviracio pompa", 20.99m));
+            prekes.Add(new Preke(12, 2, "Dviracio vairas", 50.99m));
+            prekes.Add(new Preke(13, 2, "Salmas", 99.99m));
+            prekes.Add(new Preke(14, 2, "Dviracio pedalas", 18.99m));
 
-            prekes.Add(new Preke(9, 3, "Gitaros stygos", 12.99m));
-            prekes.Add(new Preke(10, 3, "Gitaros derintuvas", 15.49m));
-            prekes.Add(new Preke(11, 3, "Gitaros deklas", 109.99m));
-            prekes.Add(new Preke(12, 3, "Gitaros pedalas", 120.99m));
+            prekes.Add(new Preke(15, 3, "Gitaros stygos", 12.99m));
+            prekes.Add(new Preke(16, 3, "Gitaros derintuvas", 15.49m));
+            prekes.Add(new Preke(17, 3, "Gitaros deklas", 109.99m));
+            prekes.Add(new Preke(18, 3, "Gitaros pedalas", 120.99m));
+            prekes.Add(new Preke(19, 3, "Mediatorius", 0.99m));
+            prekes.Add(new Preke(20, 3, "Gitaros stiprintuvas", 499.00m));
+            prekes.Add(new Preke(21, 3, "Metronomas", 8.99m));
 
         }
 

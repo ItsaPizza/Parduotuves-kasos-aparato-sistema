@@ -420,8 +420,8 @@ namespace Kasos_Aparatu_Sistema
         private void GeneruotiUzsakymuAtaskaitaPagalData(DateTime data)
         {
             var reportGenerator = new ReportGenerator(_kasosAparatuRepozitorija, _prekiuRepozitorija, _uzsakymuRepozitorija);
-            var uzsakymuAtaskaita = new List<UzsakymuAtaskaitosModelis>();
-            var pirmineAtaskaita = new List<UzsakymuAtaskaitosModelis>();
+            var uzsakymuAtaskaita = new List<UzsakymuAtaskaita>();
+            var pirmineAtaskaita = new List<UzsakymuAtaskaita>();
             if (_kasosAparatuRepozitorija.PasirinktaKasa == 1 || 
                 _kasosAparatuRepozitorija.PasirinktaKasa == 2 ||
                 _kasosAparatuRepozitorija.PasirinktaKasa == 3)
@@ -497,7 +497,7 @@ namespace Kasos_Aparatu_Sistema
         private void GeneruotiUzsakymuAtaskaita()
         {
             var reportGenerator = new ReportGenerator(_kasosAparatuRepozitorija, _prekiuRepozitorija, _uzsakymuRepozitorija);
-            var uzsakymuAtaskaita = new List<UzsakymuAtaskaitosModelis>();
+            var uzsakymuAtaskaita = new List<UzsakymuAtaskaita>();
             if (_kasosAparatuRepozitorija.PasirinktaKasa == 1 ||
                 _kasosAparatuRepozitorija.PasirinktaKasa == 2 ||
                 _kasosAparatuRepozitorija.PasirinktaKasa == 3)
@@ -540,7 +540,7 @@ namespace Kasos_Aparatu_Sistema
                 Console.WriteLine($"Bendra prekiu suma: {prekiuSuma}");
             }
         }
-        private void SpausdintiUzsakymuAtaskaita(List<UzsakymuAtaskaitosModelis> uzsakymuAtaskaita)
+        private void SpausdintiUzsakymuAtaskaita(List<UzsakymuAtaskaita> uzsakymuAtaskaita)
         {
             Console.WriteLine();
             foreach (var uzsakymas in uzsakymuAtaskaita)

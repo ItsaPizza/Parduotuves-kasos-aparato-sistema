@@ -43,16 +43,16 @@ namespace Kasos_Aparatu_Sistema
                         {
                             prekiuSuma += preke.Kaina;
                             Console.WriteLine($"Prekes ID: {preke.Id}, prekes pavadinimas: {preke.Pavadinimas}, prekes kaina: {preke.Kaina}");
-                        }                        
+                        }
                     }
                     Console.WriteLine();
                     Console.WriteLine($"Bendra uzsakymo suma: {prekiuSuma}");
                 }
             }
         }
-        public List<UzsakymuAtaskaitosModelis> GeneruotiVisuUzsakymuAtaskaita()
+        public List<UzsakymuAtaskaita> GeneruotiVisuUzsakymuAtaskaita()
         {
-            var uzsakymuAtaskaita = new List<UzsakymuAtaskaitosModelis>();
+            var uzsakymuAtaskaita = new List<UzsakymuAtaskaita>();
             List<Uzsakymas> visiUzsakymai = _uzsakymuRepozitorija.GautiVisusUzsakymus();
 
             foreach (var uzsakymas in visiUzsakymai)
@@ -66,16 +66,16 @@ namespace Kasos_Aparatu_Sistema
                         uzsakymoSuma += preke.Kaina;
                     }
                 }
-                var ataskaitosUzsakymas = new UzsakymuAtaskaitosModelis(uzsakymas.Laikas, uzsakymas.Id, uzsakymas.KasosId, uzsakymoSuma);
+                var ataskaitosUzsakymas = new UzsakymuAtaskaita(uzsakymas.Laikas, uzsakymas.Id, uzsakymas.KasosId, uzsakymoSuma);
                 uzsakymuAtaskaita.Add(ataskaitosUzsakymas);
             }
-            List<UzsakymuAtaskaitosModelis> sortedUzsakymuAtaskaita = uzsakymuAtaskaita.OrderBy(x => x.Laikas).ToList();
+            List<UzsakymuAtaskaita> sortedUzsakymuAtaskaita = uzsakymuAtaskaita.OrderBy(x => x.Laikas).ToList();
             return sortedUzsakymuAtaskaita;
         }
-        public List<UzsakymuAtaskaitosModelis> GeneruotiUzsakymuAtaskaitaPagalKasa(int kasa)
+        public List<UzsakymuAtaskaita> GeneruotiUzsakymuAtaskaitaPagalKasa(int kasa)
         {
-            List<UzsakymuAtaskaitosModelis> visiUzsakymai = GeneruotiVisuUzsakymuAtaskaita();
-            var kasosUzsakymai = new List<UzsakymuAtaskaitosModelis>();
+            List<UzsakymuAtaskaita> visiUzsakymai = GeneruotiVisuUzsakymuAtaskaita();
+            var kasosUzsakymai = new List<UzsakymuAtaskaita>();
             foreach (var uzsakymas in visiUzsakymai)
             {
                 if (uzsakymas.KasosId == kasa)
@@ -86,10 +86,10 @@ namespace Kasos_Aparatu_Sistema
 
             return kasosUzsakymai;
         }
-        public List<UzsakymuAtaskaitosModelis> GeneruotiUzsakymuAtaskaitaPagalData(List<UzsakymuAtaskaitosModelis> uzsakymuAtaskaita, 
+        public List<UzsakymuAtaskaita> GeneruotiUzsakymuAtaskaitaPagalData(List<UzsakymuAtaskaita> uzsakymuAtaskaita, 
             DateTime data)
         {
-            var ataskaitaPagalData = new List<UzsakymuAtaskaitosModelis>();
+            var ataskaitaPagalData = new List<UzsakymuAtaskaita>();
             foreach (var uzsakymas in uzsakymuAtaskaita)
             {
                 if (uzsakymas.Laikas.Date == data)

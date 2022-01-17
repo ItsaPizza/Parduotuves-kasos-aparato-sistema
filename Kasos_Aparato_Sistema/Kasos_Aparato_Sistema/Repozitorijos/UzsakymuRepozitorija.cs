@@ -34,7 +34,6 @@ namespace Kasos_Aparatu_Sistema.Repozitorijos
 
             return orderTime;
         }
-
         private List<int> GeneruotiPrekiuSarasa(int kasosNumeris)
         {
             int bendrasPrekiuKiekis = _prekiuRepozitorija.GautiPrekiuKieki();

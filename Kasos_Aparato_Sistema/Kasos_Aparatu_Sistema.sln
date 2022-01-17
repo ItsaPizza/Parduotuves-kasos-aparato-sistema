@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kasos_Aparatu_Sistema", "Kasos_Aparato_Sistema\Kasos_Aparatu_Sistema.csproj", "{EC2EA83B-C825-4BD6-A3DF-E4EBD69A8428}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{301B2122-61CA-4D62-9A02-BEFAA6711CC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{EC2EA83B-C825-4BD6-A3DF-E4EBD69A8428}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC2EA83B-C825-4BD6-A3DF-E4EBD69A8428}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC2EA83B-C825-4BD6-A3DF-E4EBD69A8428}.Release|Any CPU.Build.0 = Release|Any CPU
+		{301B2122-61CA-4D62-9A02-BEFAA6711CC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{301B2122-61CA-4D62-9A02-BEFAA6711CC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{301B2122-61CA-4D62-9A02-BEFAA6711CC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{301B2122-61CA-4D62-9A02-BEFAA6711CC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
