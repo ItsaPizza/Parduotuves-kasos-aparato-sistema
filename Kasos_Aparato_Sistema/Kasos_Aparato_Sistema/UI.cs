@@ -21,8 +21,7 @@ namespace Kasos_Aparatu_Sistema
             _kasosAparatuRepozitorija = kasosAparatuRepozitorija;
             _prekiuRepozitorija = prekiuRepozitorija;
             _uzsakymuRepozitorija = uzsakymuRepozitorija;
-
-            MainMenu();
+            
         }
         public void MainMenu()
         {
@@ -69,7 +68,8 @@ namespace Kasos_Aparatu_Sistema
             {
                 if(result == 1 || result == 2 || result == 3 |result == 4)
                 {
-                    UzsakymuArPrekiuMenu(result);
+                    _kasosAparatuRepozitorija.PasirinktaKasa = result;
+                    UzsakymuArPrekiuMenu();
                 }
                 else if(result == 5)
                 {
@@ -87,7 +87,7 @@ namespace Kasos_Aparatu_Sistema
                 KasosMenu();
             }
         }
-        public void UzsakymuArPrekiuMenu(int kasa)
+        public void UzsakymuArPrekiuMenu()
         {
             Console.WriteLine();
             Console.WriteLine("Pasirinkite ataskaitos tipa:");
@@ -97,28 +97,27 @@ namespace Kasos_Aparatu_Sistema
                 switch (result)
                 {
                     case 1:
-                        UzsakymuLaikotarpioMenu(kasa);
+                        UzsakymuLaikotarpioMenu();
                         break;
                     case 2:
-                        ////////////Prekiu Ataskaita/////////////
-                        VisuArVienosPrekesMenu(kasa);
+                        VisuArVienosPrekesMenu();
                         break;
                     case 3:
                         KasosMenu();
                         break;
                     default:
                         Console.WriteLine("Pasirinkimas neegzistuoja");
-                        UzsakymuArPrekiuMenu(kasa);
+                        UzsakymuArPrekiuMenu();
                         break;
                 }
             }
             else
             {
                 Console.WriteLine("Ivestas pasirinkimas nėra skaičius.");
-                UzsakymuArPrekiuMenu(kasa);
+                UzsakymuArPrekiuMenu();
             }
         }
-        private void VisuArVienosPrekesMenu(int kasa)
+        private void VisuArVienosPrekesMenu()
         {
             Console.WriteLine();
             Console.WriteLine("Pasirinkite visu prekiu ar vienos prekes ataskaita:");
@@ -128,28 +127,51 @@ namespace Kasos_Aparatu_Sistema
                 switch (result)
                 {
                     case 1:
-                        PrekiuLaikotarpioMenu(kasa);
+                        PrekiuLaikotarpioMenu();
                         break;
                     case 2:
-                        ////////Vienos prekes ataskaita//////
-
+                        NurodytiPrekesIdMenu();
+                        PrekėsLaikotarpioMenu();
                         break;
                     case 3:
-                        UzsakymuArPrekiuMenu(kasa);
+                        UzsakymuArPrekiuMenu();
                         break;
                     default:
                         Console.WriteLine("Pasirinkimas neegzistuoja");
-                        VisuArVienosPrekesMenu(kasa);
+                        VisuArVienosPrekesMenu();
                         break;
                 }
             }
             else
             {
                 Console.WriteLine("Ivestas pasirinkimas nėra skaičius.");
-                VisuArVienosPrekesMenu(kasa);
+                VisuArVienosPrekesMenu();
             }
         }
-        private void UzsakymuLaikotarpioMenu(int kasa)
+        public void NurodytiPrekesIdMenu()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Nurodykite norimos prekes ID:");
+            if (int.TryParse(Console.ReadLine(), out int prekesId))
+            {
+                if (prekesId > 0 && prekesId < _prekiuRepozitorija.GautiVisasPrekes().Count+1)
+                {
+                    _prekiuRepozitorija.PasirinktaPreke = prekesId;
+                }
+                else
+                {
+                    Console.WriteLine("Pasirinktas prekes ID neegzistuoja");
+                    VisuArVienosPrekesMenu();
+                }
+                                   
+            }
+            else
+            {
+                Console.WriteLine("Ivestas pasirinkimas nėra skaičius.");
+                VisuArVienosPrekesMenu();
+            }
+        }
+        private void PrekėsLaikotarpioMenu()
         {
             LaikotarpioMenu();
             if (int.TryParse(Console.ReadLine(), out int result))
@@ -157,42 +179,12 @@ namespace Kasos_Aparatu_Sistema
                 switch (result)
                 {
                     case 1:
-                        GeneruotiUzsakymuAtaskaita(kasa);
-                        UzsakymoIdMenu(kasa);
-                        
-                        break;
-                    case 2:
-                        DienosPasirinkimoMenuUzsakymams(kasa);
-                        break;
-                    case 3:
-                        UzsakymuArPrekiuMenu(kasa);
-                        break;
-                    default:
-                        Console.WriteLine("Pasirinkimas neegzistuoja");
-                        UzsakymuLaikotarpioMenu(kasa);
-                        break;
-                }
-            }
-            else
-            {
-                Console.WriteLine("Ivestas pasirinkimas nėra skaičius.");
-                UzsakymuLaikotarpioMenu(kasa);
-            }
-        }
-        private void PrekiuLaikotarpioMenu(int kasa)
-        {
-            LaikotarpioMenu();
-            if (int.TryParse(Console.ReadLine(), out int result))
-            {
-                switch (result)
-                {
-                    case 1:
-                        GeneruotiPrekiuAtaskaita(kasa);
+                        GeneruotiPrekėsAtaskaita();
                         int? pasirinkimas = GriztiIseiti();
                         switch (pasirinkimas)
                         {
                             case 1:
-                                PrekiuLaikotarpioMenu(kasa);
+                                PrekėsLaikotarpioMenu();
                                 break;
                             case 2:
                                 MainMenu();
@@ -202,32 +194,119 @@ namespace Kasos_Aparatu_Sistema
                         }
                         break;
                     case 2:
-                        DienosPasirinkimoMenuPrekems(kasa);
+                        DienosPasirinkimoMenuVienaiPrekei();
                         break;
                     case 3:
-                        VisuArVienosPrekesMenu(kasa);
+                        VisuArVienosPrekesMenu();
                         break;
                     default:
                         Console.WriteLine("Pasirinkimas neegzistuoja");
-                        PrekiuLaikotarpioMenu(kasa);
+                        PrekiuLaikotarpioMenu();
                         break;
                 }
             }
             else
             {
                 Console.WriteLine("Ivestas pasirinkimas nėra skaičius.");
-                PrekiuLaikotarpioMenu(kasa);
+                PrekiuLaikotarpioMenu();
             }
         }
-        private void GeneruotiPrekiuAtaskaita(int kasa)
+        public void GeneruotiPrekėsAtaskaita()
+        {
+            var reportGenerator = new ReportGenerator(_kasosAparatuRepozitorija, _prekiuRepozitorija, _uzsakymuRepozitorija);
+            PrekiuAtaskaita? prekesAtaskaita = reportGenerator.GeneruotiVienosPrekesAtaskaita(_prekiuRepozitorija.PasirinktaPreke);
+            if (prekesAtaskaita != null)
+            {
+                SpausdintiVienosPrekesAtaskaita(prekesAtaskaita);
+            }
+            else
+            {
+                Console.WriteLine("Prekes ataskaita negalima");
+                PrekėsLaikotarpioMenu();
+            }
+            
+        }
+        private void UzsakymuLaikotarpioMenu()
+        {
+            LaikotarpioMenu();
+            if (int.TryParse(Console.ReadLine(), out int result))
+            {
+                switch (result)
+                {
+                    case 1:
+                        GeneruotiUzsakymuAtaskaita();
+                        UzsakymoIdMenu();
+                        
+                        break;
+                    case 2:
+                        DienosPasirinkimoMenuUzsakymams();
+                        break;
+                    case 3:
+                        UzsakymuArPrekiuMenu();
+                        break;
+                    default:
+                        Console.WriteLine("Pasirinkimas neegzistuoja");
+                        UzsakymuLaikotarpioMenu();
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ivestas pasirinkimas nėra skaičius.");
+                UzsakymuLaikotarpioMenu();
+            }
+        }
+        private void PrekiuLaikotarpioMenu()
+        {
+            LaikotarpioMenu();
+            if (int.TryParse(Console.ReadLine(), out int result))
+            {
+                switch (result)
+                {
+                    case 1:
+                        GeneruotiPrekiuAtaskaita();
+                        int? pasirinkimas = GriztiIseiti();
+                        switch (pasirinkimas)
+                        {
+                            case 1:
+                                PrekiuLaikotarpioMenu();
+                                break;
+                            case 2:
+                                MainMenu();
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    case 2:
+                        DienosPasirinkimoMenuPrekems();
+                        break;
+                    case 3:
+                        VisuArVienosPrekesMenu();
+                        break;
+                    default:
+                        Console.WriteLine("Pasirinkimas neegzistuoja");
+                        PrekiuLaikotarpioMenu();
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ivestas pasirinkimas nėra skaičius.");
+                PrekiuLaikotarpioMenu();
+            }
+        }
+        private void GeneruotiPrekiuAtaskaita()
         {
             var reportGenerator = new ReportGenerator(_kasosAparatuRepozitorija, _prekiuRepozitorija, _uzsakymuRepozitorija);
             var prekiuAtaskaita = new List<PrekiuAtaskaita>(); 
-            if (kasa == 1 || kasa == 2 | kasa == 3)
+            if (_kasosAparatuRepozitorija.PasirinktaKasa == 1 || 
+                _kasosAparatuRepozitorija.PasirinktaKasa == 2 || 
+                _kasosAparatuRepozitorija.PasirinktaKasa == 3)
             {
-                prekiuAtaskaita = reportGenerator.GeneruotiPrekiuAtaskaitaPagalKasa(kasa);                
+                prekiuAtaskaita = reportGenerator.GeneruotiPrekiuAtaskaitaPagalKasa(_kasosAparatuRepozitorija.PasirinktaKasa);                
             }
-            else if (kasa == 4)
+            else if (_kasosAparatuRepozitorija.PasirinktaKasa == 4)
             {
                 prekiuAtaskaita = reportGenerator.GeneruotiVisuPrekiuAtaskaita();
             }
@@ -240,61 +319,116 @@ namespace Kasos_Aparatu_Sistema
             Console.WriteLine($"Uzsakymai vykdyti nuo {uzsakymuLaikai.Min()} iki {uzsakymuLaikai.Max()}. Pasirinkite laikotarpi:");
             Console.WriteLine("[1] - Viso laikotarpio uzsakymai, [2] - Uzsakymai pagal diena, [3] - Grizti");
         }
-        private void DienosPasirinkimoMenuPrekems(int kasa)
+        private void DienosPasirinkimoMenuVienaiPrekei()
         {
             Console.WriteLine();
             Console.WriteLine("Iveskite norima data");
-            if (DateTime.TryParse(Console.ReadLine(), out DateTime result))
+            if (DateTime.TryParse(Console.ReadLine(), out DateTime data))
             {
-                
-                //GeneruotiUzsakymuAtaskaitaPagalData(result, kasa);
+                GeneruotiVienosPrekesAtaskaitaPagalData(data);                
+                int? pasirinkimas = GriztiIseiti();
+                switch (pasirinkimas)
+                {
+                    case 1:
+                        PrekėsLaikotarpioMenu();
+                        break;
+                    case 2:
+                        MainMenu();
+                        break;
+                    default:
+                        break;
+                }
             }
             else
             {
                 Console.WriteLine("Ivestas pasirinkimas nėra datos formato.");
-                PrekiuLaikotarpioMenu(kasa);
+                PrekiuLaikotarpioMenu();
             }
-
         }
-        private void DienosPasirinkimoMenuUzsakymams(int kasa)
+        private void DienosPasirinkimoMenuPrekems()
         {
             Console.WriteLine();
             Console.WriteLine("Iveskite norima data");
-            if (DateTime.TryParse(Console.ReadLine(), out DateTime result))
+            if (DateTime.TryParse(Console.ReadLine(), out DateTime data))
             {
-                GeneruotiUzsakymuAtaskaitaPagalData(result, kasa);
-                UzsakymoIdMenu(kasa);
+                GeneruotiPrekiuAtaskaitaPagalData(data);
+                int? pasirinkimas = GriztiIseiti();
+                switch (pasirinkimas)
+                {
+                    case 1:
+                        PrekiuLaikotarpioMenu();
+                        break;
+                    case 2:
+                        MainMenu();
+                        break;
+                    default:
+                        break;
+                }
             }
             else
             {
                 Console.WriteLine("Ivestas pasirinkimas nėra datos formato.");
-                UzsakymuLaikotarpioMenu(kasa);
+                PrekiuLaikotarpioMenu();
+            }
+        }
+        private void DienosPasirinkimoMenuUzsakymams()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Iveskite norima data");
+            if (DateTime.TryParse(Console.ReadLine(), out DateTime data))
+            {
+                GeneruotiUzsakymuAtaskaitaPagalData(data);
+                UzsakymoIdMenu();
+            }
+            else
+            {
+                Console.WriteLine("Ivestas pasirinkimas nėra datos formato.");
+                UzsakymuLaikotarpioMenu();
             }
 
         }
-        private void GeneruotiPrekiuAtaskaitaPagalData(DateTime data, int kasa)
+        private void GeneruotiVienosPrekesAtaskaitaPagalData(DateTime data)
+        {
+            var reportGenerator = new ReportGenerator(_kasosAparatuRepozitorija, _prekiuRepozitorija, _uzsakymuRepozitorija);
+            PrekiuAtaskaita? prekesAtaskaita = reportGenerator.GeneruotiVienosPrekesAtaskaitaPagalData(data, _prekiuRepozitorija.PasirinktaPreke);
+            if (prekesAtaskaita != null)
+            {
+                SpausdintiVienosPrekesAtaskaita(prekesAtaskaita);
+            }
+            else
+            {
+                Console.WriteLine("Prekes ataskaita negalima");
+                PrekėsLaikotarpioMenu();
+            }
+        }
+        private void GeneruotiPrekiuAtaskaitaPagalData(DateTime data)
         {
             var reportGenerator = new ReportGenerator(_kasosAparatuRepozitorija, _prekiuRepozitorija, _uzsakymuRepozitorija);
             var prekiuAtaskaita = new List<PrekiuAtaskaita>();
-            if (kasa == 1 || kasa == 2 | kasa == 3)
+            if (_kasosAparatuRepozitorija.PasirinktaKasa == 1 || 
+                _kasosAparatuRepozitorija.PasirinktaKasa == 2 ||
+                _kasosAparatuRepozitorija.PasirinktaKasa == 3)
             {
-                prekiuAtaskaita = //Sukurti ataskaita pagal data IR kasa
+                prekiuAtaskaita = reportGenerator.GeneruotiPrekiuAtaskaitaPagalDataIrKasa(data, _kasosAparatuRepozitorija.PasirinktaKasa);
             }
-            else if (kasa == 4)
+            else if (_kasosAparatuRepozitorija.PasirinktaKasa == 4)
             {
                 prekiuAtaskaita = reportGenerator.GeneruotiPrekiuAtaskaitaPagalData(data);
             }
+            SpausdintiPrekiuAtaskaita(prekiuAtaskaita);
         }
-        private void GeneruotiUzsakymuAtaskaitaPagalData(DateTime data, int kasa)
+        private void GeneruotiUzsakymuAtaskaitaPagalData(DateTime data)
         {
             var reportGenerator = new ReportGenerator(_kasosAparatuRepozitorija, _prekiuRepozitorija, _uzsakymuRepozitorija);
             var uzsakymuAtaskaita = new List<UzsakymuAtaskaitosModelis>();
             var pirmineAtaskaita = new List<UzsakymuAtaskaitosModelis>();
-            if (kasa == 1 || kasa == 2 | kasa == 3)
+            if (_kasosAparatuRepozitorija.PasirinktaKasa == 1 || 
+                _kasosAparatuRepozitorija.PasirinktaKasa == 2 ||
+                _kasosAparatuRepozitorija.PasirinktaKasa == 3)
             {
-                pirmineAtaskaita = reportGenerator.GeneruotiUzsakymuAtaskaitaPagalKasa(kasa);
+                pirmineAtaskaita = reportGenerator.GeneruotiUzsakymuAtaskaitaPagalKasa(_kasosAparatuRepozitorija.PasirinktaKasa);
             }
-            else if (kasa == 4)
+            else if (_kasosAparatuRepozitorija.PasirinktaKasa == 4)
             {
                 pirmineAtaskaita = reportGenerator.GeneruotiVisuUzsakymuAtaskaita();
             }
@@ -303,7 +437,7 @@ namespace Kasos_Aparatu_Sistema
 
             ////////Sukurti .csv ir ikelti ataskaita ten jeigu uzteks laiko.///////
         }
-        private void UzsakymoIdMenu(int kasa)
+        private void UzsakymoIdMenu()
         {
             Console.WriteLine();
             Console.WriteLine("Pasirinkite norimą veiksma:");
@@ -313,12 +447,12 @@ namespace Kasos_Aparatu_Sistema
                 switch (result)
                 {
                     case 1:
-                        IvestiUzsakymoIdMenu(kasa);
+                        IvestiUzsakymoIdMenu();
                         int? pasirinkimas = GriztiIseiti();
                         switch (pasirinkimas)
                         {
                             case 1:
-                                UzsakymoIdMenu(kasa);
+                                UzsakymoIdMenu();
                                 break;
                             case 2:
                                 MainMenu();
@@ -328,24 +462,24 @@ namespace Kasos_Aparatu_Sistema
                         }
                         break;
                     case 2:
-                        UzsakymuLaikotarpioMenu(kasa);
+                        UzsakymuLaikotarpioMenu();
                         break;
                     case 3:
                         MainMenu();
                         break;
                     default:
                         Console.WriteLine("Pasirinkimas neegzistuoja");
-                        UzsakymoIdMenu(kasa);
+                        UzsakymoIdMenu();
                         break;
                 }
             }
             else
             {
                 Console.WriteLine("Ivestas pasirinkimas nėra skaičius.");
-                UzsakymoIdMenu(kasa);
+                UzsakymoIdMenu();
             }
         }
-        private void IvestiUzsakymoIdMenu(int kasa)
+        private void IvestiUzsakymoIdMenu()
         {
             Console.WriteLine();
             Console.WriteLine("Iveskite uzsakymo ID:");
@@ -357,18 +491,20 @@ namespace Kasos_Aparatu_Sistema
             else
             {
                 Console.WriteLine("Ivestas pasirinkimas nėra Guid tipo.");
-                UzsakymoIdMenu(kasa);
+                UzsakymoIdMenu();
             }
         }
-        private void GeneruotiUzsakymuAtaskaita(int kasa)
+        private void GeneruotiUzsakymuAtaskaita()
         {
             var reportGenerator = new ReportGenerator(_kasosAparatuRepozitorija, _prekiuRepozitorija, _uzsakymuRepozitorija);
             var uzsakymuAtaskaita = new List<UzsakymuAtaskaitosModelis>();
-            if (kasa == 1 || kasa == 2 | kasa == 3)
+            if (_kasosAparatuRepozitorija.PasirinktaKasa == 1 ||
+                _kasosAparatuRepozitorija.PasirinktaKasa == 2 ||
+                _kasosAparatuRepozitorija.PasirinktaKasa == 3)
             {
-                uzsakymuAtaskaita = reportGenerator.GeneruotiUzsakymuAtaskaitaPagalKasa(kasa);               
+                uzsakymuAtaskaita = reportGenerator.GeneruotiUzsakymuAtaskaitaPagalKasa(_kasosAparatuRepozitorija.PasirinktaKasa);               
             }
-            else if (kasa == 4)
+            else if (_kasosAparatuRepozitorija.PasirinktaKasa == 4)
             {
                 uzsakymuAtaskaita = reportGenerator.GeneruotiVisuUzsakymuAtaskaita();                
             }
@@ -376,6 +512,14 @@ namespace Kasos_Aparatu_Sistema
             SpausdintiUzsakymuAtaskaita(uzsakymuAtaskaita);
 
             ////////Sukurti .csv ir ikelti ataskaita ten jeigu uzteks laiko.///////
+        }
+        private void SpausdintiVienosPrekesAtaskaita(PrekiuAtaskaita prekesAtaskaita)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"Prekes ID: {prekesAtaskaita.Id}, kasos ID: {prekesAtaskaita.KasosId}, " +
+                $"prekes pavadinimas: {prekesAtaskaita.Pavadinimas}, " +
+                    $"kieks: {prekesAtaskaita.Kiekis}, suma: {prekesAtaskaita.Suma}");
+
         }
         private void SpausdintiPrekiuAtaskaita(List<PrekiuAtaskaita> prekiuAtaskaita)
         {

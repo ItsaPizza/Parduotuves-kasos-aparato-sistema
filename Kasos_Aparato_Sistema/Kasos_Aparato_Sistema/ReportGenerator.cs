@@ -169,5 +169,33 @@ namespace Kasos_Aparatu_Sistema
 
             return prekiuAtaskaita;
         }
+        public List<PrekiuAtaskaita> GeneruotiPrekiuAtaskaitaPagalDataIrKasa(DateTime data, int kasa)
+        {
+            var prekiuAtaskaita = new List<PrekiuAtaskaita>();
+            var visuKasuVienosDatosAtaskaita = GeneruotiPrekiuAtaskaitaPagalData(data);
+            foreach (var preke in visuKasuVienosDatosAtaskaita)
+            {
+                if (preke.KasosId == kasa)
+                {
+                    prekiuAtaskaita.Add(preke);
+                }
+            }
+
+            return prekiuAtaskaita;
+        }
+        public PrekiuAtaskaita? GeneruotiVienosPrekesAtaskaita(int prekesId)
+        {
+            List<PrekiuAtaskaita> visosPrekes = GeneruotiVisuPrekiuAtaskaita();
+            PrekiuAtaskaita? prekesAtaskaita = visosPrekes.SingleOrDefault(x => x.Id == prekesId);
+
+            return prekesAtaskaita;           
+        }
+        public PrekiuAtaskaita? GeneruotiVienosPrekesAtaskaitaPagalData(DateTime data, int prekesId)
+        {
+            List<PrekiuAtaskaita> visosPrekesPagalData = GeneruotiPrekiuAtaskaitaPagalData(data);
+            PrekiuAtaskaita? prekesAtaskaita = visosPrekesPagalData.SingleOrDefault(x => x.Id == prekesId);
+
+            return prekesAtaskaita;
+        }
     }
 }

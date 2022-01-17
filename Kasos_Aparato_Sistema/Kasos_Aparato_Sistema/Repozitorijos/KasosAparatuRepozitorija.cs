@@ -9,6 +9,7 @@ namespace Kasos_Aparatu_Sistema.Repozitorijos
 {
     public class KasosAparatuRepozitorija
     {
+        public int PasirinktaKasa = 0;
         private List<KasosAparatas> kasosAparatai = new List<KasosAparatas>();
         public KasosAparatuRepozitorija()
         {

@@ -14,18 +14,12 @@ namespace Kasos_Aparatu_Sistema
         {
             var kasosAparatuRepozitorija = new KasosAparatuRepozitorija();
             var prekiuRepozitorija = new PrekiuRepozitorija();
-            var uzsakymuRepozitorija = new UzsakymuRepozitorija(prekiuRepozitorija, kasosAparatuRepozitorija, 50);
+            var uzsakymuRepozitorija = new UzsakymuRepozitorija(prekiuRepozitorija, kasosAparatuRepozitorija, 500);
 
             var UI = new UI(kasosAparatuRepozitorija, prekiuRepozitorija, uzsakymuRepozitorija);
-            
 
-            List<Uzsakymas> uzsakymai = uzsakymuRepozitorija.GautiVisusUzsakymus();
+            UI.MainMenu();
             
-            foreach(var uzsakymas in uzsakymai)
-            {
-                Console.WriteLine($"Uzsakymo numeris: {uzsakymas.Id}, uzsakymo laikas: {uzsakymas.Laikas}");
-            }
-            Console.ReadLine();
         }
     }
 }

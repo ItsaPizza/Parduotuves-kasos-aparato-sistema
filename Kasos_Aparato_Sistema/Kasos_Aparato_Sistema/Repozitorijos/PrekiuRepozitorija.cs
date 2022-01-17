@@ -9,6 +9,7 @@ namespace Kasos_Aparatu_Sistema.Repozitorijos
 {
     public class PrekiuRepozitorija
     {
+        public int PasirinktaPreke = 0;
         private List<Preke> prekes = new List<Preke>();
         public PrekiuRepozitorija()
         {
