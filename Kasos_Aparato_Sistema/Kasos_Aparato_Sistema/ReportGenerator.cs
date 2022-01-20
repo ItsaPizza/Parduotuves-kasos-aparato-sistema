@@ -60,7 +60,7 @@ namespace Kasos_Aparatu_Sistema
                 decimal uzsakymoSuma = 0m;
                 foreach (var id in uzsakymas.PrekiuId)
                 {
-                    Preke? preke = _prekiuRepozitorija.GautiPreke(id);
+                    Preke preke = _prekiuRepozitorija.GautiPreke(id);
                     if (preke != null)
                     {
                         uzsakymoSuma += preke.Kaina;

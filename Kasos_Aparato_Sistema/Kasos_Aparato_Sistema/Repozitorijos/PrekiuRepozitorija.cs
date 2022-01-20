@@ -40,7 +40,7 @@ namespace Kasos_Aparatu_Sistema.Repozitorijos
         }
 
         public List<Preke> GautiVisasPrekes() => prekes;
-        public Preke? GautiPreke(int id) => prekes.SingleOrDefault(x => x.Id == id);
+        public Preke GautiPreke(int id) => prekes.SingleOrDefault(x => x.Id == id);
         public int GautiPrekiuKieki() => prekes.Count();
         public List<int> GautiPrekiuNumeriusPagalKasa(int kasa)
         {

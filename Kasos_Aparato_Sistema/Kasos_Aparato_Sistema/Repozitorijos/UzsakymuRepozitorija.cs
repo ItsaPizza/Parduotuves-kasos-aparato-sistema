@@ -36,7 +36,7 @@ namespace Kasos_Aparatu_Sistema.Repozitorijos
         }
         private List<int> GeneruotiPrekiuSarasa(int kasosNumeris)
         {
-            int bendrasPrekiuKiekis = _prekiuRepozitorija.GautiPrekiuKieki();
+            
             List<int> prekiuSarasas = new List<int>();
             int prekiuKiekis = Random.Next(1, 10); //MIN ir MAX prekiu kiekis keičiamas pagal poreikį
             List<int> kasosPrekiuSarasas = _prekiuRepozitorija.GautiPrekiuNumeriusPagalKasa(kasosNumeris);
@@ -55,7 +55,8 @@ namespace Kasos_Aparatu_Sistema.Repozitorijos
             for (int i = 0; i < uzsakymuSkaicius; i++)
             {
                 int kasosNumeris = Random.Next(1, kasosAparatuKiekis + 1);
-                uzsakymai.Add(new Uzsakymas(GeneruotiUzsakymoId(), GeneruotiUzsakymoLaika(), kasosNumeris, GeneruotiPrekiuSarasa(kasosNumeris)));
+                uzsakymai.Add(new Uzsakymas(GeneruotiUzsakymoId(), GeneruotiUzsakymoLaika(), 
+                    kasosNumeris, GeneruotiPrekiuSarasa(kasosNumeris)));
             }
         }
         public List<Uzsakymas> GautiVisusUzsakymus() => uzsakymai;
